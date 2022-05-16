@@ -184,8 +184,8 @@
 						<div class="mt-3 mt-lg-0">
 							<form class="d-flex align-items-center justify-content-center justify-content-lg-end" action="{{route('catalog')}}">
 								<div class="f_08 font-2 me-3">Перейти на страницу</div>
-								<input type="number" class="mini f_08 me-3">
-								<button type="button"
+								<input type="number" name="page" class="mini f_08 me-3">
+								<button type="submit"
 									class="f_08 btn_3 btn_main btn_xs">Перейти</button>
 							</form>
 						</div>

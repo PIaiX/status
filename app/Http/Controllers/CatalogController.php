@@ -23,6 +23,10 @@ class CatalogController extends Controller
         $hairTypes = HairType::all();
         $products = Product::paginate(8);
 
+        if (isset($request->page)) {
+            $products = Product::offset($request->page)->paginate(8);
+        }
+
         if (isset($request->orderBy)) {
             if ($request->orderBy == "default") {
                 $products = Product::paginate($this->paginate);
