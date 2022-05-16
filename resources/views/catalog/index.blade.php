@@ -65,10 +65,10 @@
 			<div class="row gx-xxl-5">
 				<div class="d-none d-md-block col-md-8 col-lg-9 offset-md-4 offset-lg-3 mb-5">
 					<div class="d-flex justify-content-between align-items-center">
-						<select class="f_09 font-2">
-							<option value="Популярное">Популярное</option>
-							<option value="По возрастанию цены">По возрастанию цены</option>
-							<option value="По убыванию цены">По убыванию цены</option>
+						<select class="f_09 font-2" id="sort">
+							<option value="Популярное" data-order="popular">Популярное</option>
+							<option value="По возрастанию цены" data-order="price-asc">По возрастанию цены</option>
+							<option value="По убыванию цены" data-order="price-desc">По убыванию цены</option>
 						</select>
 						<form action="{{route('search')}}">
 							<input name="search" type="search" placeholder="Поиск..." class="font-2 f_09">
@@ -95,7 +95,7 @@
 									</ul>
 									@endisset
 								</li>
-									
+
 								@endif
 							@endforeach
 							{{-- <li>
@@ -166,13 +166,12 @@
 						onclick="toggleList(this)"></button>
 				</div>
 				<div class="col-md-8 col-lg-9">
-					<div class="row g-3 g-sm-4 g-xxl-5 row-cols-2 row-cols-lg-3 row-cols-xxl-4">
+					<div class="row g-3 g-sm-4 g-xxl-5 row-cols-2 row-cols-lg-3 row-cols-xxl-4 catalog-products">
 						@foreach ($products as $product)
                             <div>
                                 @include('includes.product', $product)
                             </div>
                         @endforeach
-
 					</div>
 					<button type="button" class="accent f_09 fw_5 bb_1 mx-auto mt-5">Показать еще</button>
 

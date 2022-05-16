@@ -10,16 +10,34 @@ use Illuminate\Http\Request;
 
 class CatalogController extends Controller
 {
+    private $paginate = 8;
+
     /**
      * @param $category
      * @return void
      */
-    public function index($category = null)
+    public function index(Request $request, $category = null)
     {
         $categories = Category::all();
         $brands = Brand::all();
         $hairTypes = HairType::all();
         $products = Product::paginate(8);
+
+        if (isset($request->orderBy)) {
+            if ($request->orderBy == "default") {
+                $products = Product::paginate($this->paginate);
+            }
+            if ($request->orderBy == "price-asc") {
+                $products = Product::orderBy('price')->paginate($this->paginate);
+            }
+            if ($request->orderBy == "price-desc") {
+                $products = Product::orderBy('price', 'desc')->paginate($this->paginate);
+            }
+        }
+
+        if ($request->ajax()) {
+            return view('ajax.products', compact('products'))->render();
+        }
 
         return view('catalog.index', compact('categories', 'hairTypes', 'brands', 'products'));
     }
@@ -69,7 +87,7 @@ class CatalogController extends Controller
             ->where('title', 'LIKE', "%{$search}%")
             ->orWhere('full_desc', 'LIKE', "%{$search}%")
             ->paginate(8);
-    
+
         // Return the search view with the resluts compacted
         return view('catalog.index', compact('categories', 'hairTypes', 'brands', 'products'));
     }

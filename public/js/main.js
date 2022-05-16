@@ -298,25 +298,3 @@ window.addEventListener("load", function() {
         sendData();
     });
 });
-
-// ajax
-$(".f_09.font-2").on("change", function(e) {
-    var sorted = $(this).val();
-    console.log(sorted)
-
-    $.ajax({
-        url: "{{ route('sorted') }}",
-        data: {
-            "_token": "{{ csrf_token() }}",
-            sorted
-        },
-        type: 'POST',
-        dataType: 'json',
-        success: function(result) {
-            console.log(result)
-        },
-        error: function() {
-            console.log('error...');
-        }
-    });
-});

@@ -5,6 +5,7 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
 	<title>Status @yield('title')</title>
 	<link rel="shortcut icon" href="{{asset('images/favicon.png')}}" type="image/png">
 	<link rel="stylesheet" href="{{asset('css/bootstrap.min.css')}}" />
@@ -767,7 +768,53 @@
     <script type="text/javascript" src="{{asset('js/sliders.js')}}"></script>
     <script type="text/javascript" src="{{asset('js/main.js')}}"></script>
     <script type="text/javascript" src="{{asset('js/mask.js')}}"></script>
+    <script>
+        // sorting products (Ajax)
+        $(document).ready(function() {
+            $('#sort').on('change', function() {
+                let orderBy = $(this).find(':selected').data('order');
+                console.log(orderBy);
 
+                $.ajaxSetup({
+                    headers: {
+                        'X-CSRF-TOKEN': jQuery('meta[name="csrf-token"]').attr('content')
+                    }
+                });
+
+                $.ajax({
+                    type: "GET",
+                    url: "{{ route('catalog') }}",
+                    data: {
+                        orderBy: orderBy,
+                    },
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    },
+                    success: function(data) {
+                        let positionParameters = location.pathname.indexOf('?');
+                        let url = location.pathname.substring(positionParameters, location.pathname.length);
+                        let newURL = url + '?';
+                        newURL += 'orderBy=' + orderBy;
+                        history.pushState({}, '', newURL);
+
+                        $(".pagination a.page-link").each((_, el) => {
+                            let page = el.href.split('?');
+                            let positionParameters = location.pathname.indexOf('?');
+                            let url = location.pathname.substring(positionParameters, location.pathname.length);
+                            let newURL = url + '?';
+                            newURL += 'orderBy=' + orderBy + '&' + page[1];
+                            el.href = newURL
+                        })
+
+                        $(".catalog-products").html(data);
+                    },
+                    error: function(xhr, status, err) {
+                        console.log(err);
+                    }
+                });
+            });
+        });
+    </script>
     </body>
 
     </html>
