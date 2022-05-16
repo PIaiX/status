@@ -52,7 +52,7 @@
 				</div>
 
 				<div class="col-4 col-sm-3 col-md-2">
-					<a href="{{route('orders.index')}}"><img src="{{asset('img/logo-white.svg')}}" alt="Студия красоты" class="logo"></a>
+					<a href="{{route('index')}}"><img src="{{asset('img/logo-white.svg')}}" alt="Студия красоты" class="logo"></a>
 				</div>
 				<div class="d-none d-sm-block col-4 col-md-6 col-lg-8">
 					<div class="text-end fw_3 mb-lg-2"><a href="tel:89510668777">{{$phone_number}}</a></div>
@@ -83,7 +83,6 @@
 			</div>
 		</div>
 	</header>
-
     @yield('content')
 
     <footer class="d-none d-md-block">
@@ -92,15 +91,9 @@
                 <div>
                     <nav class="f-menu">
                         <ul>
-                            <li><a href="service-page-1.html">Стрижка</a></li>
-                            <li><a href="service-page-2.html">Окрашивание</a></li>
-                            <li><a href="service-page-3.html">Уход для волос</a></li>
-                            <li><a href="service-page-4.html">Эстетическая трихология</a></li>
-                            <li><a href="service-page-5.html">Ламинирование ресниц</a></li>
-                            <li><a href="service-page-6.html">Оформление бровей</a></li>
-                            <li><a href="service-page-7.html">Макияж</a></li>
-                            <li><a href="service-page-8.html">Маникюр</a></li>
-                            <li><a href="service-page-9.html">Педикюр</a></li>
+                            @foreach ($services as $service)
+                                <li><a href="{{route('service-page', $service->alias)}}">{{$service->title}}</a></li>
+                            @endforeach
                         </ul>
                     </nav>
                 </div>

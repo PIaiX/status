@@ -98,13 +98,6 @@
 								<div class="f_12 dark-gray fw_6 mb-1">Максим Жданов</div>
 								<div class="light-gray f_09">Парикмахер, коллорист</div>
 							</div>
-						</div>
-						<div>
-							<div class="employee-preview">
-								<img src="img/sample.jpg" alt="Руслан Петров" class="mb-2">
-								<div class="f_12 dark-gray fw_6 mb-1">Руслан Петров</div>
-								<div class="light-gray f_09">Парикмахер, стилист</div>
-							</div>
 						</div> --}}
 						@foreach ($teams as $team)
 							<div>
@@ -121,30 +114,9 @@
 								<div class="f_12 dark-gray fw_6 mb-1">Наталья Ворон</div>
 								<div class="light-gray f_09">Топ - стилист, колорист, универсал, эстетический - трихолог.</div>
 							</div>
-						</div>
-						<div>
-							<div class="employee-preview">
-								<img src="img/team/alsu.jpg" alt="Алсу Залялутдинова" class="mb-2">
-								<div class="f_12 dark-gray fw_6 mb-1">Алсу Залялутдинова</div>
-								<div class="light-gray f_09">Стилист, коллорист, мастер униварсал по женским и мужским стрижкам</div>
-							</div>
-						</div>
-						<div>
-							<div class="employee-preview">
-								<img src="img/team/elfia.jpg" alt="Эльсия" class="mb-2">
-								<div class="f_12 dark-gray fw_6 mb-1">Эльсия</div>
-								<div class="light-gray f_09">Стилист, коллорист, женский мастер</div>
-							</div>
-						</div>
-						<div>
-							<div class="employee-preview">
-								<img src="img/team/ekaterina.jpg" alt="Екатерина Рыбак" class="mb-2">
-								<div class="f_12 dark-gray fw_6 mb-1">Екатерина Рыбак</div>
-								<div class="light-gray f_09">Мастер ногтевого сервиса</div>
-							</div>
 						</div> --}}
 					</div>
-					<div class="d-block d-lg-none swiper-3">
+					{{-- <div class="d-block d-lg-none swiper-3">
 						<div class="swiper-wrapper">
 							<div class="swiper-slide">
 								<div class="employee-preview active">
@@ -175,8 +147,8 @@
 								</div>
 							</div>
 						</div>
-					</div>
-					<div class="text-center d-none d-lg-block"><a href="team.html" class="font-2 f_09 fw_6 accent bb_1">Показать всех</a></div>
+					</div> --}}
+					<div class="text-center d-none d-lg-block"><a href="{{route('team')}}" class="font-2 f_09 fw_6 accent bb_1">Показать всех</a></div>
 				</div>
 				<div>
 					<div class="employee pt-4 pt-lg-0 mb-4 mb-lg-5 mb-lg-0">
@@ -208,7 +180,7 @@
 								<div class="text mt-2 mt-sm-4">Опыт работы более 10-и лет, постоянное повышение квалификации. Обучение Казахстан, Новосибирск, Москва, Итальянская школа ALDO COPPOLA. Выполнение любых сложных работ как в стрижках, так и в окрашиваниях, выход из черного цвета в светлый тон без ломкости волос.</div>
 							</div>
 							<div class="mt-xl-5">
-								<a href="http://salon-status.online/master-3.html" class="btn_main btn_2 mx-auto mt-3 mt-sm-4 mt-lg-5"><span class="f_09">Подробнее</span></a>
+								<a href="{{route('team')}}" class="btn_main btn_2 mx-auto mt-3 mt-sm-4 mt-lg-5"><span class="f_09">Подробнее</span></a>
 							</div>
 							<div class="mt-xl-5">
 								<button type="button" data-bs-toggle="modal" data-bs-target="#callback" class="btn_main btn_1 mx-auto mt-3 mt-sm-4 mt-lg-5"><span class="f_09">Записаться</span></button>
@@ -287,20 +259,20 @@
 			<div class="row gx-2 gx-md-4 justify-content-center">
 				<div class="col-6 col-sm-5 col-md-4 col-lg-5 font-2 f_12">
 					<div class="fw_7 mb-1 mb-sm-3">Телефона:</div>
-					<div class="fw_3"><a href="tel:8 951 066 8 777">8 951 066 8 777</a></div>
+					<div class="fw_3"><a href="tel:{{$contacts[0]->phone}}">{{$contacts[0]->phone}}</a></div>
 
 					<div class="fw_7 mt-3 mt-sm-4 mb-1 mb-sm-3">Время работы:</div>
-					<div class="fw_3">10:00 до 21:00</div>
+					<div class="fw_3">{{$contacts[0]->work_time}}</div>
 
 					<div class="fw_7 mt-3 mt-sm-4 mb-1 mb-sm-3">Адрес:</div>
-					<div class="fw_3">г.Казань, улица Меридианная, 3</div>
+					<div class="fw_3">{{$contacts[0]->address}}</div>
 
 					<div class="fw_7 mt-3 mt-sm-4 mb-1 mb-sm-3">Вопросы и предложения:</div>
-					<div class="fw_3"><a href="mailto:Salon-status.online@yandex.ru">Salon-status.online@yandex.ru</a></div>
+					<div class="fw_3"><a href="mailto:{{$contacts[0]->email}}">{{$contacts[0]->email}}</a></div>
 				</div>
 				<div class="col-6 col-sm-7 col-md-8 col-lg-7 col-xl-6 col-xxl-5 position-relative">
 					<div id="map">
-						<script type="text/javascript" charset="utf-8" async src="https://api-maps.yandex.ru/services/constructor/1.0/js/?um=constructor%3Ab6869cf3ce256453a0d24d6aaf74f116ec099ed7ef294ed3696d2c4d67be4c65&amp;width=100%25&amp;height=100%25&amp;lang=ru_RU&amp;scroll=false"></script>
+						<script type="text/javascript" charset="utf-8" async src="{{$contacts[0]->map}}"></script>
 					</div>
 					<button class="callback-anim" type="button" data-bs-toggle="modal" data-bs-target="#callback">
 						<span>Онлайн запись</span>

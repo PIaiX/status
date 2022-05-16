@@ -10,8 +10,7 @@ class ServicesController extends Controller
 {
     public function index()
     {
-        $services = Service::all();
-        return view('services.index', compact('services'));
+        return view('services.index');
     }
 
     public function service($alias)
